@@ -1,27 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column} from "typeorm";
-
-@Entity()
+import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
+import { HydratedDocument } from "mongoose";
+@Schema()
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+   @Prop({
+    unique: true
+   })
+   email: string
 
-    @Column()
-    firstname: string;
-
-    @Column()
-    lastname: string;
-
-    @Column()
-    email: string
-
-    @Column()
-    password: string
-
-    @Column({
-        enum: ["male", "female"]
-    })
-    gender: "male" | "female";
-
-    @Column()
-    age: number;
+   @Prop()
+   password: string
 }
+
+export const userSchema = SchemaFactory.createForClass(User);
